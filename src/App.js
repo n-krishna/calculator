@@ -2,53 +2,49 @@ import { useRef, useState } from "react";
 import "./App.css";
 
 function App() {
+  const resultRef = useRef(null);
   const inputRef = useRef(null);
   const [result, setResult] = useState(0);
 
-
   const getInputValue = () => Number(inputRef.current.value);
 
-  function plus(e) {
+  const plus = (e) => {
     e.preventDefault();
-    setResult((prev) => prev + getInputValue());
-  }
+    setResult((result) => result + getInputValue());
+  };
 
-  function minus(e) {
+  const minus = (e) => {
     e.preventDefault();
-    setResult((prev) => prev - getInputValue());
-  }
+    setResult((result) => result - getInputValue());
+  };
 
-  function times(e) {
+  const times = (e) => {
     e.preventDefault();
-    setResult((prev) => prev * getInputValue());
-  }
+    setResult((result) => result * getInputValue());
+  };
 
-  function divide(e) {
+  const divide = (e) => {
     e.preventDefault();
-    const inputValue = getInputValue();
-    if (inputValue !== 0) {
-      setResult((prev) => prev / inputValue);
-    }
-  }
+    setResult((result) => result / getInputValue());
+  };
 
-  function resetInput(e) {
+
+  const resetInput = (e) => {
     e.preventDefault();
     inputRef.current.value = 0;
-  }
+  };
 
-  function resetResult(e) {
+  const resetResult = (e) =>{
     e.preventDefault();
-    setResult(0);
-  }
+    setResult((prevVal) => prevVal * 0);
+  };
 
-  return (
+return (
     <div className="App">
-      <div>
-        <h1>Simplest Working Calculator</h1>
-      </div>
+      <h1>Simplest Working Calculator</h1>
 
       <form>
-        <p>{result}</p>
+        <p ref={resultRef}>{result}</p>
 
         <input
           ref={inputRef}
